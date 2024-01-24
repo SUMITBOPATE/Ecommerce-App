@@ -12,7 +12,7 @@ import Star from "./components/Star.js";
 import AddToCart from "./components/AddToCart.js";
 
 
-const API = "https://api.pujakaitem.com/api/products";
+const API = process.env.REACT_APP_API_KEY;
 
 
 const SingleProduct = () => {
