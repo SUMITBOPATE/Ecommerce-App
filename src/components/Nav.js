@@ -4,11 +4,11 @@ import styled from "styled-components";
 import { FiShoppingCart } from "react-icons/fi";
 import { CgMenu, CgClose } from "react-icons/cg";
 import { useCartContext } from "../context/cart_context";
-import { useAuth0 } from "@auth0/auth0-react";
+// import { useAuth0 } from "@auth0/auth0-react";
 const Nav = () => {
   const [menuIcon, setMenuIcon] = useState();
 const {total_item}=useCartContext();
-const { loginWithRedirect,logout } = useAuth0();
+// const { loginWithRedirect,logout } = useAuth0();
   const Nav = styled.nav`
     .navbar-lists {
       display: flex;
@@ -176,10 +176,10 @@ const { loginWithRedirect,logout } = useAuth0();
             </NavLink>
           </li>
 
-          <button onClick={() => loginWithRedirect()}>Log In</button>;
+          {/* <button onClick={() => loginWithRedirect()}>Log In</button>;
           <button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
       Log Out
-    </button>
+    </button> */}
           <li>
             <NavLink
               to="/about"

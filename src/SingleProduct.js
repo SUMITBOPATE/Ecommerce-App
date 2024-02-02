@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {useParams} from "react-router-dom"
-import { useEffect } from "react";
+import { useEffect ,useState} from "react";
 import { useProductContext } from "./context/productContext";
 import PageNavigation from "./components/PageNavigation.js";
 import MyImage from "./components/MyImage";
@@ -16,14 +16,14 @@ const API = process.env.REACT_APP_API_KEY;
 
 
 const SingleProduct = () => {
-
+  // console.log('SingleProduct component mounted here in sp');
   
  const {getSingleProduct,isSingleLoading,singleProduct}=useProductContext();
 //  console.log(
-//   " ~file: SingleProduct.js ~line 10 ~ SingleProduct ~ singleProduct",singleProduct
+//   " ~file: SingleProduct.js ~line 10 ~ SingleProduct ~ singleProduct",singleProduct.js
 //  );
  const { id }=useParams();
-
+//  console.log('ID:', id);
  const {
   id: alias,
   name,
@@ -37,17 +37,47 @@ const SingleProduct = () => {
   image,
 } = singleProduct;
 
-useEffect(() => {
-  getSingleProduct(`${API}?id=${id}`);
-}, []);
 
- 
+
+// useEffect(() => {
+//   // Make sure `id` is defined and not `undefined`
+//   if (id) {
+//     getSingleProduct(`${API}/singleproduct/${id}`);
+//   }
+// }, [id]);
+
+// useEffect((id) => {
+//   console.log('Fetching product...');
+//   getSingleProduct(`${API}?id=${id}`);
+// }, [id]);
+
+const [error, setError] = useState(null);
+
+useEffect(() => {
+  const fetchProduct = async () => {
+    try {
+      // console.log('Fetching product...');
+      await getSingleProduct(`${API}?id=${id}`);
+      // console.log(" ~file: SingleProduct.js ~line 10 ~ SingleProduct ~ singleProduct",singleProduct);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  fetchProduct();
+}, [id]);
         if (isSingleLoading) {
            return <div className="page_loading">Loading.....</div>;
            }
 
-
-        return   <Wrapper>
+           if (error) {
+            return <div>Error: {error}</div>;
+          }
+          
+      
+        return  (
+         <Wrapper>
+          
                    <PageNavigation title={name} />
                     <Container className="container">
           <div className="grid grid-two-column">
@@ -59,8 +89,8 @@ useEffect(() => {
             {/* product dAta  */}
             <div className="product-data">
               <h2>{name}</h2>
-              <p> <Star stars={stars} reviews={reviews}/></p>
-              <p>{reviews} reviews</p>
+              <div> <Star stars={stars} reviews={reviews}/></div>
+              <p>{reviews}  product reviews</p>
               <p className="product-data-price">
                 MRP:
                  <del>
@@ -110,8 +140,8 @@ useEffect(() => {
             </div>
           </div>
         </Container>
-      </Wrapper>;
-        };
+      </Wrapper>
+      )  };
 
 
 

@@ -6,7 +6,7 @@ import { Button } from "./styles/Button";
 import FormatPrice from "./Helpers/FormatPrice";
 const Cart = () => {
   const { cart ,clearCart,total_amount,shipping_fee}=useCartContext();
-  console.log("🚀 ~ file: Cart.js ~ line 6 ~ Cart ~ cart", cart);
+  // console.log("🚀 ~ file: Cart.js ~ line 6 ~ Cart ~ cart", cart);
 
   if (cart.length === null) {
     return (
@@ -67,7 +67,8 @@ const Cart = () => {
           </div>
         </div>
 
-</div></Wrapper>
+</div>
+</Wrapper>
   );
 };
 const EmptyDiv = styled.div`

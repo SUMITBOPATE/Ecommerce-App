@@ -4,9 +4,11 @@ import reducer from "../reducer/productReducer";
 const AppContext = createContext();
   
 
+
+// const API = process.env.REACT_APP_API_KEY; 
 const API = "https://api.pujakaitem.com/api/products";
    
-const intialState={
+const intialState={ 
         isLoading:false,
         isError:false,
         products:[],
@@ -37,7 +39,7 @@ const AppProvider = ({ children }) => {
 
 // my 2nd api call for single product page info 
 
-  const getSingleProduct =async(url)=>{
+  const getSingleProduct = async (url)=>{
     dispatch({type:"SET_SINGLE_LOADING"});
            try {
                   const res = await axios.get(url);
@@ -50,7 +52,9 @@ const AppProvider = ({ children }) => {
   }
 
  useEffect(()=>{
+
   getProducts(API);
+
  },[]);
  
   return (

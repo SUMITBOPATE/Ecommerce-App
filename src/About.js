@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+// import React, { useContext } from 'react'
 import HeroSection from './components/HeroSection'
 import {  useProductContext } from './context/productContext'
 
@@ -6,7 +6,7 @@ import {  useProductContext } from './context/productContext'
 const About = () => {
 const {myName}=useProductContext();
   const data={
-    name: "Shopit",
+    name: "ShopKart",
   };
   return (
     <>
