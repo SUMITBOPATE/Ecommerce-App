@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {useParams} from "react-router-dom"
-import { useEffect ,useState} from "react";
+import { useEffect } from "react";
 import { useProductContext } from "./context/productContext";
 import PageNavigation from "./components/PageNavigation.js";
 import MyImage from "./components/MyImage";
@@ -11,26 +11,26 @@ import { TbTruckDelivery, TbReplace } from "react-icons/tb";
 import Star from "./components/Star.js";
 import AddToCart from "./components/AddToCart.js";
 
+const API = "https://api.pujakaitem.com/api/products";
 
-const API = process.env.REACT_APP_API_KEY;
 
 
 const SingleProduct = () => {
-  // console.log('SingleProduct component mounted here in sp');
+  console.log('SingleProduct component mounted here in sp');
   
  const {getSingleProduct,isSingleLoading,singleProduct}=useProductContext();
-//  console.log(
-//   " ~file: SingleProduct.js ~line 10 ~ SingleProduct ~ singleProduct",singleProduct.js
-//  );
+ console.log(
+  " ~file: SingleProduct.js ~line 10 ~ SingleProduct ~ singleProduct",singleProduct.js
+ );
  const { id }=useParams();
 //  console.log('ID:', id);
  const {
-  id: alias,
+   id:alias,
   name,
   company,
   price,
   description,
-  category,
+  
   stock,
   stars,
   reviews,
@@ -38,42 +38,14 @@ const SingleProduct = () => {
 } = singleProduct;
 
 
-
-// useEffect(() => {
-//   // Make sure `id` is defined and not `undefined`
-//   if (id) {
-//     getSingleProduct(`${API}/singleproduct/${id}`);
-//   }
-// }, [id]);
-
-// useEffect((id) => {
-//   console.log('Fetching product...');
-//   getSingleProduct(`${API}?id=${id}`);
-// }, [id]);
-
-const [error, setError] = useState(null);
-
 useEffect(() => {
-  const fetchProduct = async () => {
-    try {
-      // console.log('Fetching product...');
-      await getSingleProduct(`${API}?id=${id}`);
-      // console.log(" ~file: SingleProduct.js ~line 10 ~ SingleProduct ~ singleProduct",singleProduct);
-    } catch (err) {
-      setError(err.message);
-    }
-  };
+  getSingleProduct(`${API}?id=${id}`);
+}, []);
 
-  fetchProduct();
-}, [id]);
-        if (isSingleLoading) {
-           return <div className="page_loading">Loading.....</div>;
-           }
+if (isSingleLoading) {
+  return <div className="page_loading">Loading.....</div>;
+}
 
-           if (error) {
-            return <div>Error: {error}</div>;
-          }
-          
       
         return  (
          <Wrapper>

@@ -4,9 +4,9 @@ import reducer from "../reducer/productReducer";
 const AppContext = createContext();
   
 
-
-// const API = process.env.REACT_APP_API_KEY; 
 const API = "https://api.pujakaitem.com/api/products";
+// const API = process.env.REACT_APP_API_KEY; 
+
    
 const intialState={ 
         isLoading:false,
